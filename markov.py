@@ -14,22 +14,43 @@ def make_chains(corpus):
     for index in range(len(word_list)):
         item_a = word_list[index]
         item_b = word_list[index + 1]
+        item_c = word_list[index + 2]
         #item_c = word_list[index + 2] <- this is the third instance. The other group used 
         #.get to check and append the list section of the dictionary...
-        print item_a
+        
 
         print item_b
-        if index < (len(word_list) - 2):
+    
+        if index < (len(word_list) - 3):
             key_value = (item_a, item_b)
-            #counter = counter + 1
-            #print counter
-            word_dict[key_value] = []
-            print key_value
+            value_list = [item_c]
+            # do an if statement, if it is there already, append the list. 
+            #If it is not there in list, create new list
+            
+            if not key_value in word_dict:
+               word_dict[key_value] = [item_c]
+            else:
+               value_list = value_list + (item_c)
+            #value_list.append(item_c)
+          
+            #word_dict[key_value] = value_list
 
+            print key_value
+            
 
         else:
             print "I'm done."
             break
+    print word_dict
+    
+
+"""
+for statement looks through out txt file using the dict keys as unique identifiers
+every time the for loop finds a matching pair, the loop will take the next word (the third word) 
+append the list associated with that uniue key
+
+check: print dict
+"""
 
 
     # for index, item in enumerate(word_list):
@@ -47,7 +68,7 @@ def make_chains(corpus):
                  
 
 #TUPLE = (ITEM1[INDEX],ITEM2,)
-    print word_dict
+    
 
 
 
