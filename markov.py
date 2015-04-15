@@ -8,12 +8,46 @@ def make_chains(corpus):
 
     #print word_list
 
-    seuss_dictory_no_values = {}
+    word_dict = {}
+    
+    #counter = 0
+    for index in range(len(word_list)):
+        item_a = word_list[index]
+        item_b = word_list[index + 1]
+        #item_c = word_list[index + 2] <- this is the third instance. The other group used 
+        #.get to check and append the list section of the dictionary...
+        print item_a
 
-    for item in word_list:
-        seuss_dictory_no_values[(word_list[word_list.index(item)], word_list[word_list.index(item) + 1])] = []
+        print item_b
+        if index < (len(word_list) - 2):
+            key_value = (item_a, item_b)
+            #counter = counter + 1
+            #print counter
+            word_dict[key_value] = []
+            print key_value
 
-    print seuss_dictory_no_values
+
+        else:
+            print "I'm done."
+            break
+
+
+    # for index, item in enumerate(word_list):
+
+    #     if index == (len(word_list) - 2):
+    #         print "I'm at the end"
+    #         break
+    #     else: 
+    #         print "I am not at the end yet."
+    #         # key_value = (item[index -2 ]) #item[index + 1])
+
+    # print key_value 
+    #         #testvariable = word_dict[(item[index], item[index + 1],)] 
+                 
+                 
+
+#TUPLE = (ITEM1[INDEX],ITEM2,)
+    print word_dict
 
 
 
