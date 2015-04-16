@@ -1,4 +1,6 @@
+
 import sys
+from random import choice
 
 def make_chains(corpus):
     """Takes input text as string; returns dictionary of markov chains."""
@@ -11,46 +13,47 @@ def make_chains(corpus):
     word_dict = {}
     
     #counter = 0
-    for index in range(len(word_list)):
-        item_a = word_list[index]
-        item_b = word_list[index + 1]
-        item_c = word_list[index + 2]
+    for index in range(len(word_list)-2):
+        key = (word_list[index], word_list[index + 1])
+        value = word_list[index + 2]
         #item_c = word_list[index + 2] <- this is the third instance. The other group used 
         #.get to check and append the list section of the dictionary...
         
-
-        print item_b
     
-        if index < (len(word_list) - 3):
-            key_value = (item_a, item_b)
-            value_list = [item_c]
+        
+    
             # do an if statement, if it is there already, append the list. 
             #If it is not there in list, create new list
             
-            if not key_value in word_dict:
-               word_dict[key_value] = [item_c]
-            else:
-               value_list = value_list + (item_c)
+            # if key not in word_dict:
+            #    word_dict[key] = [value]
+            # else:
+            #    value = value + value
+
+        if key not in word_dict:
+            word_dict[key] = []
+        word_dict[key].append(value)
+
+
             #value_list.append(item_c)
           
             #word_dict[key_value] = value_list
 
-            print key_value
+            #print key
             
 
-        else:
-            print "I'm done."
-            break
-    print word_dict
+        #else:
+         #   print "I'm done."
+          #  break
+    return word_dict
     
+# """
+# for statement looks through out txt file using the dict keys as unique identifiers
+# every time the for loop finds a matching pair, the loop will take the next word (the third word) 
+# append the list associated with that uniue key
 
-"""
-for statement looks through out txt file using the dict keys as unique identifiers
-every time the for loop finds a matching pair, the loop will take the next word (the third word) 
-append the list associated with that uniue key
-
-check: print dict
-"""
+# check: print dict
+# """
 
 
     # for index, item in enumerate(word_list):
@@ -70,10 +73,6 @@ check: print dict
 #TUPLE = (ITEM1[INDEX],ITEM2,)
     
 
-
-
-
-make_chains("green-eggs.txt")
     # string_into_list = []
 
     # for line in open_file:
@@ -90,11 +89,33 @@ make_chains("green-eggs.txt")
 
     #print txt_file_string
 
-
-#def make_text(chains):
-  #  """Takes dictionary of markov chains; returns random text."""
-
+def make_text(chains):
+    """Takes dictionary of markov chains; returns random text."""
     
+    result_lst = []
+    key_str = ""
+    key = choice(chains.keys())
+
+    while key in chains:
+        next_one = choice(chains[key])
+        key = (key[1], next_one)
+        key_str = "%s %s %s" % (key_str, key[1], next_one)
+        # result_lst.append(key)
+
+    #print result_lst
+    
+    result_lst = str(result_lst).strip('[]')
+    print type(key_str)
+    print key_str
+
+    #final_markov_chain = ' '.join(result_lst)
+    #print final_markov_chain
+    
+  # while 
+
+    # while loop that randomly chooses a key form our dict and then print the key 
+    # and the third indexed word and repeats until there are no word combos that we can do
+
     #return "Here's some random text."
 
 
@@ -105,11 +126,10 @@ make_chains("green-eggs.txt")
 # input_text = "green-eggs.txt"
 
 # # Get a Markov chain
-# chain_dict = make_chains(input_text)
+chain_dict = make_chains("green-eggs.txt")
 
-# print chain_dict
 
 # Produce random text
-# random_text = make_text(chain_dict)
+random_text = make_text(chain_dict)
 
 #print random_text
