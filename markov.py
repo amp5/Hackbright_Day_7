@@ -40,7 +40,7 @@ class SimpleMarkovGenerator(object):
     # check: print dict
     # """
 
-    def make_text(chains):
+    def make_text(self, chains):
         """Takes dictionary of markov chains; returns random text."""
         
         
@@ -59,13 +59,21 @@ class SimpleMarkovGenerator(object):
     # be used by examining the `sys.argv` arguments (if neccessary, see the
     # Python docs for sys.argv)
 
-script, filename = argv
 
-print argv
+if __name__ == "__main__":
+    script, filename = argv
+
+    print argv
 
 
-instance = SimpleMarkovGenerator()
-chain_dict = instance.make_chains(instance.read_file(filename))
+    instance = SimpleMarkovGenerator()
 
-print chain_dict
+
+    #### NNED TO MAKE THIS PART PRINT ME THE MARKOV GENERATOR!
+    chain_dict = instance.make_chains(instance.read_file(filename))
+
+    random_text = instance.make_text(chain_dict)
+
+    #print chain_dict
+    print random_text
 
