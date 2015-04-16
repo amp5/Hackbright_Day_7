@@ -1,12 +1,18 @@
 
-import sys
+
+from sys import argv
 from random import choice
 
-def make_chains(corpus):
+script, filename = argv
+
+opened_filename = open(filename)
+read_filename = opened_filename.read()
+
+def make_chains(read_filename):
     """Takes input text as string; returns dictionary of markov chains."""
 
 
-    word_list = open(corpus).read().split()
+    word_list = read_filename.split()
 
     #print word_list
 
@@ -46,6 +52,7 @@ def make_chains(corpus):
          #   print "I'm done."
           #  break
     return word_dict
+    print word_dict
     
 # """
 # for statement looks through out txt file using the dict keys as unique identifiers
@@ -92,19 +99,22 @@ def make_chains(corpus):
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
     
-    result_lst = []
-    key_str = ""
+    
     key = choice(chains.keys())
+    
+    key_str = key[0] +" " + key[1]
 
     while key in chains:
         next_one = choice(chains[key])
+        key_str = key_str + " " + next_one
         key = (key[1], next_one)
-        key_str = "%s %s %s" % (key_str, key[1], next_one)
+        # key_str = "%s %s %s" % (key_str, key[1], next_one)
+        
         # result_lst.append(key)
 
     #print result_lst
     
-    result_lst = str(result_lst).strip('[]')
+    
     print type(key_str)
     print key_str
 
@@ -126,10 +136,10 @@ def make_text(chains):
 # input_text = "green-eggs.txt"
 
 # # Get a Markov chain
-chain_dict = make_chains("green-eggs.txt")
-
+chain_dict = make_chains(read_filename)
+print chain_dict
 
 # Produce random text
 random_text = make_text(chain_dict)
 
-#print random_text
+print random_text
